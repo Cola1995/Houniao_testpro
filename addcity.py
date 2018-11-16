@@ -91,10 +91,6 @@ for ii in ac:
 
         time.sleep(3)
         driver.find_element_by_id('addSub').click()
-        print("修改添加")
-
-
-
 
 
 
