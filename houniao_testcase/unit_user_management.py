@@ -20,7 +20,7 @@ class user_management(unittest.TestCase):
         self.pla = '测试工位'
         self.a = 'test'
         self.aa=''
-    @unittest.skip
+
     def test_01(self):
         '''汽修厂管理添加汽修厂测试用例'''
         e=random.randint(0,9)   #手机号最后两位用随机数拼接
@@ -81,7 +81,7 @@ class user_management(unittest.TestCase):
         time.sleep(2)
         count1 = self.driver.find_element_by_xpath('//*[ @ id = "main"]/div[1]/div[2]/div[4]/div[1]/span[1]').text[-5]  # 获取当前汽修厂数量
         self.assertGreater(int(count1),int(count),msg='汽修厂创建失败 faied')
-    @unittest.skip
+
     def test_02(self):
         '''汽修厂新增：北京不修车修理厂，测试工位,视屏账号test'''
 
@@ -112,10 +112,10 @@ class user_management(unittest.TestCase):
         count = \
         self.driver.find_element_by_xpath('// *[ @ id = "main"] / div[2] / div[2] / div[4] / div[1] / span[1]').text[
             -5]  # 获取当前汽修厂数量
-        self.assertGreater(int(count),int(count1),msg='汽修厂工位新增失败')
+        self.assertGreater(int(count1),int(count),msg='汽修厂工位新增失败')
 
 
-    @unittest.skip
+
     def test_03(self):
         '''汽修厂工位删除用例'''
 
@@ -146,7 +146,7 @@ class user_management(unittest.TestCase):
 
 
 
-    @unittest.skip
+
     def test_04(self):
         '''用户管理添加用户测试用例'''
         self.driver.refresh()
@@ -188,7 +188,7 @@ class user_management(unittest.TestCase):
         self.assertGreater(int(count1),int(count),msg='添加用户失败')
 
 
-    @unittest.skip
+
     def test_05(self):
         '''查询用户测试用例：姓名test1 电话13322115522'''
         self.driver.refresh()
@@ -210,8 +210,9 @@ class user_management(unittest.TestCase):
         count = self.driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[2]/div[4]/div[1]/span[1]').text[
             -5]  # 获取数据总数
         self.assertEqual(count,'1',msg='查询失败')
-    @unittest.skip
+
     def test_06(self):
+        '''新建取送员测试用例'''
         self.driver.refresh()
         h = random.randint(0, 9)
         j = random.randint(0, 9)
@@ -249,7 +250,8 @@ class user_management(unittest.TestCase):
         self.assertLess(int(count),int(count1),msg='新建取送员失败')
 
     def test_07(self):
-        #self.driver.refresh()
+        self.driver.refresh()
+        '''查询取送员测试用例'''
         time.sleep(2)
         self.driver.find_element_by_xpath('//*[@id="mCSB_1_container"]/ul/li[5]/a').click()  # 点击首页一级菜单用户管理
         time.sleep(2)
@@ -267,6 +269,78 @@ class user_management(unittest.TestCase):
         time.sleep(2)
         count=self.driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[2]/div[4]/div[1]/span[1]').text[-5]
         self.assertEqual(count,'1',msg='查找失败')
+
+
+    def test_08(self):
+        self.driver.refresh()
+        '''新建顾问测试用例'''
+        h = random.randint(0, 9)
+        j = random.randint(0, 9)
+        k = random.randint(0, 9)
+        l = random.randint(0, 9)
+        tel = f"131{h}{j}{k}{l}5685"
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="mCSB_1_container"]/ul/li[5]/a').click()  # 点击首页一级菜单用户管理
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="mCSB_1_container"]/ul/li[5]/ul/li[3]/a').click()  # 点击二级菜单顾问管理
+        time.sleep(2)
+        self.driver.switch_to.frame(self.driver.find_element_by_tag_name("iframe"))  # 切换只iframe
+        time.sleep(2)
+        count=self.driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[2]/div[4]/div[1]/span[1]').text[19:22]
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="toolbar"]/a[1]').click()  #点击新增顾问按钮
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="userAdviserPhone" and @type="text"]').clear()
+        self.driver.find_element_by_xpath('//*[@id="userAdviserPhone" and @type="text"]').send_keys(tel)
+        # self.driver.find_element_by_id('userAdviserPhone').clear()
+        # self.driver.find_element_by_id('userAdviserPhone').send_keys(tel)
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="userAdviserName" and @type="text"]').clear()
+        self.driver.find_element_by_xpath('//*[@id="userAdviserName" and @type="text"]').send_keys('刘师傅')
+        # self.driver.find_element_by_id('userAdviserName').clear()
+        # self.driver.find_element_by_id('userAdviserName').send_keys('刘师傅')
+        time.sleep(2)
+        h=self.driver.find_element_by_id('userAdviserRepairId')
+        Select(h).select_by_visible_text('北京不修车修理厂')
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="createForm"]/div[2]/a[1]').click()  #点击保存
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[1]/div[2]/button').click()
+        time.sleep(2)
+        count1=self.driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[2]/div[4]/div[1]/span[1]').text[19:22]
+        self.assertLess(int(count),int(count1),msg="新建顾问失败")
+
+
+    def test_09(self):
+        self.driver.refresh()
+        '''删除顾问测试用例'''
+
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="mCSB_1_container"]/ul/li[5]/a').click()  # 点击首页一级菜单用户管理
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="mCSB_1_container"]/ul/li[5]/ul/li[3]/a').click()  # 点击二级菜单顾问管理
+        time.sleep(2)
+        self.driver.switch_to.frame(self.driver.find_element_by_tag_name("iframe"))  # 切换只iframe
+        time.sleep(2)
+        count = self.driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[2]/div[4]/div[1]/span[1]').text[19:22]
+        print(count)
+        time.sleep(2)
+        self.driver.find_element_by_id('userName').clear()
+        self.driver.find_element_by_id('userName').send_keys('刘师傅')
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="collapseOne"]/div/div[3]/button').click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="table"]/tbody/tr/td[3]').click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="toolbar"]/a[2]').click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath('/html/body/div[3]/div[2]/div/div/div/div/div[4]/button[1]').click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[1]/div[2]/button').click()
+        time.sleep(4)
+        count1 = self.driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[2]/div[4]/div[1]/span[1]').text[17:20]
+        print(count1)
+        self.assertEqual(0,int(count1),msg="删除顾问失败")
     @classmethod
     def tearDownClass(self):
         time.sleep(5)
