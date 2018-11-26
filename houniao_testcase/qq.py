@@ -1,7 +1,7 @@
 str="显示第 1 到第 10 条记录，总共 13 条记录"
-print(len(str))
-print(str[-5])
-print(str[19:22])
+# print(len(str))
+# print(str[-5])
+# print(str[19:22])
 
 # str='//*[@id="table"]/tbody/tr[6]/td[2]'
 # a=1
@@ -9,17 +9,26 @@ print(str[19:22])
 # print(b)
 # from selenium import webdriver
 # import unittest
-# import time
+import time
 #
-# from selenium.webdriver.support.select import Select
-#
-# driver=webdriver.Chrome()
-# driver.get("http://124.95.129.86:9000/manage/index")
-# driver.maximize_window()
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
+driver=webdriver.Chrome()
+driver.get("https://v.qq.com/")
+driver.maximize_window()
+time.sleep(5)
+f=driver.find_element_by_xpath('//*[@id="mod_head_notice_trigger"]/img')
+print(f)
+time.sleep(3)
+ActionChains(driver).move_to_element(f).perform()
+
 # driver.find_element_by_id("username").send_keys("guanliyuan")
 # driver.find_element_by_id("password").send_keys("youjian@2018")
 # time.sleep(5)
 # driver.find_element_by_id("login-bt").click()
+
 #
 #
 # time.sleep(2)

@@ -92,6 +92,7 @@ class user_management(unittest.TestCase):
         self.driver.find_element_by_xpath('//*[@id="mCSB_1_container"]/ul/li[5]/ul/li[5]/a').click()  # 点击二级菜单汽修厂工位管理
         time.sleep(2)
         self.driver.switch_to.frame(self.driver.find_element_by_tag_name("iframe"))  # 切换只iframe
+
         time.sleep(2)
         count1 = self.driver.find_element_by_xpath('// *[ @ id = "main"] / div[2] / div[2] / div[4] / div[1] / span[1]').text[-5]  # 获取当前汽修厂数量
                 # // *[ @ id = "main"] / div[2] / div[2] / div[4] / div[1] / span[1]
