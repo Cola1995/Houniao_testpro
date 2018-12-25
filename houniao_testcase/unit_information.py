@@ -59,9 +59,24 @@ class Information(unittest.TestCase):
         print(c2)
         self.assertGreater(int(c2),int(c1),msg='添加公告失败')
 
-
-
-
+    def test_02(self):
+        self.driver.refresh()
+        Info1_page = InformationPage(self.driver, self.url, u"权限管理系统")
+        Info1_page.information_click()
+        time.sleep(2)
+        Info1_page.gonggao_click()
+        time.sleep(2)
+        Info1_page.toframe()  # 切换至frame
+        time.sleep(2)
+        Info1_page.ctime_click()
+        time.sleep(2)
+        Info1_page.first_check()
+        time.sleep(2)
+        Info1_page.deltitle_click()
+        time.sleep(2)
+        Info1_page.q_click()
+        # time.sleep(2)
+        # Info1_page.refush()
 
     @classmethod
     def tearDownClass(self):

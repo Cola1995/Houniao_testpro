@@ -23,6 +23,10 @@ class InformationPage(BasePage):
     textarea_loc=(By.XPATH,'/html/body')   #文本框位置
     count_loc=(By.XPATH,'//*[@id="main"]/div[1]/div[2]/div[4]/div[1]/span[1]')
     refush_loc=(By.XPATH,'//*[@id="main"]/div[1]/div[1]/div[2]/button')
+    ctime_loc=(By.XPATH,'//*[@id="main"]/div[1]/div[2]/div[1]/table/thead/tr/th[4]/div[1]')   #创建时间
+    check_loc=(By.XPATH,'//*[@id="table"]/tbody/tr[1]/td[3]')    #第一条记录
+    deltitle_loc=(By.XPATH,'//*[@id="toolbar"]/a[2]')   #删除文章按钮
+    quren_loc=(By.XPATH,'/html/body/div[2]/div[2]/div/div/div/div/div[4]/button[1]')   #确认按钮
     # 操作
     # 通过继承覆盖（Overriding）方法：如果子类和父类的方法名相同，优先用子类自己的方法。
     # 打开网页
@@ -97,3 +101,16 @@ class InformationPage(BasePage):
 
     def refush(self):
         self.find_element(*self.refush_loc).click()
+
+    def ctime_click(self):
+        self.find_element(*self.ctime_loc).click()
+
+    def first_check(self):
+        self.find_element(*self.check_loc).clicK()
+
+
+    def deltitle_click(self):
+        self.find_element(*self.deltitle_loc).click()
+
+    def q_click(self):
+        self.find_element(*self.quren_loc).click()

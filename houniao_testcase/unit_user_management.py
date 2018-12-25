@@ -156,6 +156,7 @@ class user_management(unittest.TestCase):
         k= random.randint(0, 9)
         l= random.randint(0, 9)
         tel = f"1312525{h}{j}{k}{l}"
+
         self.aa=tel
         time.sleep(2)
         self.driver.find_element_by_xpath('//*[@id="mCSB_1_container"]/ul/li[5]/a').click()  # 点击首页一级菜单用户管理
@@ -346,6 +347,7 @@ class user_management(unittest.TestCase):
     def tearDownClass(self):
         time.sleep(5)
         self.driver.quit()
+
 
 
 if __name__=='__main__':
